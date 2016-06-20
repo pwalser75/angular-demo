@@ -19,11 +19,11 @@ gulp.task('connect', function () {
 var bundler = watchify(browserify('./src/web/index.js', { debug: true }).transform(babel));
 
 function cleanTarget() {
-	gulp.src('build', {read: false})
+	return gulp.src('build', {read: false})
 		.pipe(clean());
 }
 function compile() {
-    bundler.bundle()
+	return bundler.bundle()
       .on('error', function(err) { console.error(err); this.emit('end'); })
       .pipe(source('build.js'))
       .pipe(buffer())
@@ -33,10 +33,11 @@ function compile() {
 }
 
 function copyResources() {
-	gulp.src([
+	return gulp.src([
 			'src/web/**/*.html', 
 			'src/web/**/*.jpg', 
-			'src/web/**/*.png'
+			'src/web/**/*.png',
+			'src/web/**/*.css'
 		]).pipe(gulp.dest('build'));
 }
 
