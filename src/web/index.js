@@ -1,1 +1,1 @@
-console.log("Application stared");
+import './components/application/index';

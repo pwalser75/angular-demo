@@ -13,15 +13,25 @@
 	<link rel="stylesheet" href="css/page.css">
   </head>
   <body>
+  
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+			<a href="#" ui-sref="application" class="navbar-left">
+				<img src="images/computer.png" style="width:48px; margin-right: 10px"> 
+			</a>
+			<a href="#" ui-sref="application" class="navbar-brand">
+				<b>Angular</b> Demo Project
+			</a>
+        </div>
+      </div>
+    </nav>
+  
 	<div class="container">
-		<h1>Hello World</h1>
-		Lorem ipsum dolor sit amet
-		<p>
-		<img src="images/computer.png" style="width:256px">
+		<div class="main" ui-view="application">
+			Loading content...
+		</div>
 	</div>
-
-    <div class="main" ui-view="application">
-    </div>
 
     <script src="main.js"></script>
   </body>
