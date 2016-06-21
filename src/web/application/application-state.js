@@ -8,7 +8,7 @@ function detailRoute($stateProvider) {
             views: {
                 application: {
                     controller: 'ApplicationController as applicationController',
-                    templateUrl: './components/application/application.html'
+                    templateUrl: './application/application.html'
                 }
             }
         });

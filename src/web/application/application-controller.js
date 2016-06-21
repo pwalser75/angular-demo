@@ -1,6 +1,6 @@
 class ApplicationController {
-
-    constructor() {
+	
+    constructor(movieService) {
 		this.title="ApplicationController";
 		this.message="Hello from Angular";
 		this.data=[
@@ -17,7 +17,8 @@ class ApplicationController {
 				description: "This is the third item"
 			}
 		];
+		this.movieService=movieService;
     }
 }
-
+ApplicationController.$inject=['MovieService'];
 export default ApplicationController;
