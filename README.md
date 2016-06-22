@@ -6,7 +6,7 @@ Install node module dependencies:
 ```
 npm install
 ```
-Install gulp on your system (`-g = global`)
+Install gulp on your system (execute as admin user)
 ```
 npm install -g gulp
 ```
