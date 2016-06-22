@@ -10,13 +10,13 @@
 </ul>
 <p>
 <h1>Movies</h1>
-<div ng-repeat="movie in applicationController.movieService.getMovies()" style="display: flex; margin: 5px 0;">
-	<div style="margin-right: 10px;">
-		<img src="{{movie.image}}" style="height:80px">
-	</div>
-	<div style="flex: 1;">
-		<b>{{movie.title}}</b><p>
+<div class="list-item" ng-repeat="movie in applicationController.movieService.getMovies()">
+	<span class="list-item-icon">
+		<img src="{{movie.image}}" style="height:120px">
+	</span>
+	<span class="list-item-content">
+		<h2>{{movie.title}}</h2>
 		{{movie.year}} | {{movie.genres}}<br>
 		{{movie.rating}}/10
-	</div>
+	</span>
 </div>

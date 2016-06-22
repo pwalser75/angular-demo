@@ -35,3 +35,30 @@ body {
 	overflow: hidden;
 	white-space: nowrap;
 }
+/* List item component */
+.list-item {
+	display: flex;
+	margin: 10px 0;
+}
+.list-item h1, .list-item h2, .list-item h3 {
+	margin: 0 0 5px 0;
+	font-weight: 700;
+}
+.list-item h1 {
+	font-size: 160%;
+}
+.list-item h2 {
+	font-size: 140%;
+}
+.list-item h3 {
+	font-size: 120%;
+}
+.list-item-icon {
+	flex: 0;
+	margin: 0 10px 0 0;
+}
+.list-item-content {
+	flex: 1;
+	margin: 0;
+	padding: 0;
+}
