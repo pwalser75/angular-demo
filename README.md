@@ -1,16 +1,22 @@
 # AngularJS demo project
 Demo project, experimenting with modularized AngularJS.
 
-## Installation
+## Setup
 Install node module dependencies:
 ```
 npm install
 ```
-Run local server:
+Install gulp on your system (`-g = global`)
+```
+npm install -g gulp
+```
+
+## Build / Run
+Build and run local server (accessible on [http://localhost:4000](http://localhost:4000)):
 ```
 gulp
 ```
-Build only:
+Build only (target folder: `./build`):
 ```
 gulp build
 ```
