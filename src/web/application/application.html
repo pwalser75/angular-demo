@@ -9,14 +9,4 @@
 	</li>
 </ul>
 <p>
-<h1>Movies</h1>
-<div class="list-item" ng-repeat="movie in applicationController.movieService.getMovies()">
-	<span class="list-item-icon">
-		<img src="{{movie.image}}" style="height:120px">
-	</span>
-	<span class="list-item-content">
-		<h2>{{movie.title}}</h2>
-		{{movie.year}} | {{movie.genres}}<br>
-		{{movie.rating}}/10
-	</span>
-</div>
+<a href="#" ui-sref="movies">List movies</a>

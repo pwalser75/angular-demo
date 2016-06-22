@@ -1,0 +1,13 @@
+<h1>Movies</h1>
+<div class="list-item" ng-repeat="movie in movieListController.movieService.getMovies()">
+	<span class="list-item-icon">
+		<img src="{{movie.image}}" style="height:96px">
+	</span>
+	<span class="list-item-content">
+		<h2>{{movie.title}}</h2>
+		{{movie.year}} | {{movie.genres}}<br>
+		{{movie.rating}}/10
+	</span>
+</div>
+
+<a href="#" ui-sref="index">Back to root</a>

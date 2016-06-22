@@ -2,12 +2,12 @@
 function detailRoute($stateProvider) {
 
 	 return $stateProvider
-        .state('index', {
-            url: '/',
+        .state('movies', {
+            url: '/movies',
             views: {
                 application: {
-                    controller: 'ApplicationController as applicationController',
-                    templateUrl: './application/application.html'
+                    controller: 'MovieListController as movieListController',
+                    templateUrl: 'components/movie-list/movie-list.html'
                 }
             }
         });
