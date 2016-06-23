@@ -7,7 +7,7 @@ function detailRoute($stateProvider) {
             views: {
                 application: {
                     controller: 'ApplicationController as applicationController',
-                    templateUrl: './application/application.html'
+                    templateUrl: 'templates/application.html'
                 }
             }
         });

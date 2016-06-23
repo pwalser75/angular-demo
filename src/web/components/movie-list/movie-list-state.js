@@ -7,7 +7,7 @@ function detailRoute($stateProvider) {
             views: {
                 application: {
                     controller: 'MovieListController as movieListController',
-                    templateUrl: 'components/movie-list/movie-list.html'
+                    templateUrl: 'templates/movie-list.html'
                 }
             }
         });
