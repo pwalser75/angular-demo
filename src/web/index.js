@@ -1,1 +1,1 @@
-import './application/index';
+import './components/application/index';

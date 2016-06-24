@@ -5,7 +5,7 @@
 	</span>
 	<span class="list-item-content">
 		<h2>{{movie.title}}</h2>
-		{{movie.year}} | {{movie.genres}}<br>
+		{{movie.year}} | {{movie.genres | commaSeparated}}<br>
 		{{movie.rating}}/10
 	</span>
 </div>
