@@ -1,7 +1,7 @@
 import angular from 'angular';
 import angularUiRouter from 'angular-ui-router';
 
-import common from '../common/index';
+import common from '../../common/index';
 
 import movieListState from './movie-list-state';
 import movieListController from './movie-list-controller';

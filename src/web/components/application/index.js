@@ -2,7 +2,7 @@ import angular from 'angular';
 import angularUiRouter from 'angular-ui-router';
 import applicationState from './application-state';
 import applicationController from './application-controller';
-import movieComponent from '../movie-list/index';
+import movieComponent from '../movie/index';
 
 const dependencies = [
    'ui.router',

@@ -1,4 +1,3 @@
-
 function detailRoute($stateProvider) {
 
 	 return $stateProvider

@@ -1,0 +1,15 @@
+<h1>{{movieDetailController.movie.title}}</h1>
+
+<button ui-sref="movies"><span class="glyphicon glyphicon-chevron-left"></span> Back</button>
+
+<div class="list-item">
+	<span class="list-item-icon">
+		<img ng-src="{{movieDetailController.movie.image}}" style="height:320px">
+	</span>
+	<span class="list-item-content">
+		<b>{{movieDetailController.movie.year}}</b> | {{movieDetailController.movie.genres | commaSeparated}}<br>
+		<rating value="movieDetailController.movie.rating" max="10"></rating>&nbsp;<b>{{movieDetailController.movie.rating}}</b>/10
+		<p>
+		{{movieDetailController.movie.plot}}
+	</span>
+</div>
