@@ -1,3 +1,12 @@
+/*
+	AngularJS Demo Project
+	======================
+	
+	Uses:
+		sourcemaps (http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
+
+*/
+
 const gulp = require('gulp');
 const clean = require('gulp-clean');
 const sourcemaps = require('gulp-sourcemaps');

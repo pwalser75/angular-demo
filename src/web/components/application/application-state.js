@@ -8,6 +8,10 @@ function detailRoute($stateProvider) {
                 application: {
                     controller: 'ApplicationController as applicationController',
                     templateUrl: 'templates/application.html'
+                },
+				menu: {
+                    controller: 'ApplicationController as applicationController',
+                    templateUrl: 'templates/default-menu.html'
                 }
             }
         });

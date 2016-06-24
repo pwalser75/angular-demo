@@ -18,14 +18,18 @@
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
-			<a href="#" ui-sref="application" class="navbar-left">
+			<a href="#" ui-sref="index" class="navbar-left">
 				<img src="images/computer.png" style="width:48px; margin-right: 10px"> 
 			</a>
-			<a href="#" ui-sref="application" class="navbar-brand">
+			<a href="#" ui-sref="index" class="navbar-brand">
 				<b>Angular</b> Demo Project
 			</a>
         </div>
-      </div>
+		 <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav" ui-view="menu">
+		  </ul>
+	  </div>
+      </div>	 
     </nav>
   
 	<div class="container">
