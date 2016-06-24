@@ -1,7 +1,6 @@
 class MovieService {
 
     constructor() {
-	console.log('MovieService!');
 		this.movies=[
 			{
 				title: "Blade Runner",
@@ -30,7 +29,15 @@ class MovieService {
 				genres: [ 'Action', 'Adventure', 'Fantasy' ],
 				rating: 8.2,
 				image: 'http://ia.media-imdb.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_UX182_CR0,0,182,268_AL_.jpg'
+			},
+			{
+				title: "Ghost Busters",
+				year: 1984,
+				genres: [ 'Adventure', 'Comedy', 'Fantasy' ],
+				rating: 7.8,
+				image: 'http://ia.media-imdb.com/images/M/MV5BMTkxMjYyNzgwMl5BMl5BanBnXkFtZTgwMTE3MjYyMTE@._V1_UX182_CR0,0,182,268_AL_.jpg'
 			}
+			
 		];
     }
 	

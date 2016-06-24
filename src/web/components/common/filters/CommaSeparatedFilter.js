@@ -1,4 +1,4 @@
-export default function commaSeparatedFilter () {
+export default function CommaSeparatedFilter () {
 	
 	return function(text) {
 		if (text){

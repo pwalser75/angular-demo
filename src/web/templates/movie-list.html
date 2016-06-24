@@ -1,11 +1,11 @@
 <h1>Movies</h1>
 <div class="list-item" ng-repeat="movie in movieListController.movieService.getMovies()">
 	<span class="list-item-icon">
-		<img src="{{movie.image}}" style="height:96px">
+		<img ng-src="{{movie.image}}" style="height:96px">
 	</span>
 	<span class="list-item-content">
-		<h2>{{movie.title}}</h2>
-		{{movie.year}} | {{movie.genres | commaSeparated}}<br>
-		{{movie.rating}}/10
+		<h1>{{movie.title}}</h1>
+		<b>{{movie.year}}</b> | {{movie.genres | commaSeparated}}<br>
+		<rating value="movie.rating" max="10"></rating>&nbsp;<b>{{movie.rating}}</b>/10
 	</span>
 </div>
