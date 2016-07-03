@@ -16,6 +16,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^4.1.0",
+    "gulp-exit": "0.0.2",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "vinyl-buffer": "^1.0.0",

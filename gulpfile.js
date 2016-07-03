@@ -17,6 +17,7 @@ const watchify = require('watchify');
 const babel = require('babelify');
 const sass = require('gulp-sass')
 const connect = require('gulp-connect')
+const exit = require('gulp-exit')
 
 // build parameters
 
@@ -76,9 +77,14 @@ function log(message) {
 
 gulp.task('watch', function() { return watch(); });
 gulp.task('startServer', function() { return startServer(); });
+gulp.task('rebuild', function(){
+	clean();
+	copyResources();
+	compile();
+});
 gulp.task('build', function(){
 	clean();
-	compile();
 	copyResources();
+	compile().pipe(exit());
 });
-gulp.task('default', ['build', 'watch', 'startServer']);
+gulp.task('default', ['rebuild', 'watch', 'startServer']);
