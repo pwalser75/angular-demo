@@ -4,5 +4,6 @@ class MovieListController {
 		this.movieService=movieService;
     }
 }
+
 MovieListController.$inject=['MovieService'];
 export default MovieListController;

@@ -58,7 +58,7 @@ function cleanTarget() {
 
 // copy resources
 function copyResources() {
-	return gulp.src(staticTypeMatchers)
+	gulp.src(staticTypeMatchers)
 		.pipe(gulp.dest(paths.targetDir));
 }
 
@@ -82,26 +82,35 @@ function bundle(bundler) {
     .pipe(livereload()); // Reload the view in the browser
 }
 
+function startServer() {
+	connect.server({
+		root: targetDir,
+		port: 4000
+	})
+};
+
+gulp.task('startServer', function() { return startServer(); });
+
 // Gulp task for build
 gulp.task('default', function() {
   livereload.listen(); // Start livereload server
   var args = merge(watchify.args, { debug: true }); // Merge in default watchify args with browserify arguments
   
-  cleanTarget();
-
+  
   var bundler = browserify(config.source, args) // Browserify
     .plugin(watchify, {ignoreWatch: ['**/node_modules/**', '**/bower_components/**']}) // Watchify to watch source file changes
     .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
   
-   copyResources();
-   gulp.watch(staticTypeMatchers,function() {
-		console.log('changes detected, copying static resources...');
+    cleanTarget();
+	copyResources();
+    bundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
+
+	gulp.watch(staticTypeMatchers,function() {
 		copyResources();
+		gulp.src('').pipe(notify('Updated resources'));
 	});
 	
-	  bundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
-
     bundler.on('update', function() {
-    bundle(bundler); // Re-run bundle on source updates
-  });
+		bundle(bundler); // Re-run bundle on source updates
+	  });
 });
