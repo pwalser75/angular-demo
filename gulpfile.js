@@ -1,90 +1,107 @@
 /*
-	AngularJS Demo Project
-	======================
-	
-	Uses:
-		sourcemaps (http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
-
+ Script by http://mikevalstar.com/post/fast-gulp-browserify-babelify-watchify-react-build/
 */
 
-const gulp = require('gulp');
+'use strict';
+
+const gulp = require('gulp');  // Base gulp package
 const clean = require('gulp-clean');
-const sourcemaps = require('gulp-sourcemaps');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const browserify = require('browserify');
-const watchify = require('watchify');
-const babel = require('babelify');
-const sass = require('gulp-sass')
-const connect = require('gulp-connect')
-const exit = require('gulp-exit')
+const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
+const browserify = require('browserify'); // Providers "require" support, CommonJS
+const notify = require('gulp-notify'); // Provides notification to both the console and Growel
+const rename = require('gulp-rename'); // Rename sources
+const sourcemaps = require('gulp-sourcemaps'); // Provide external sourcemap files
+const livereload = require('gulp-livereload'); // Livereload support for the browser
+const gutil = require('gulp-util'); // Provides gulp utilities, including logging and beep
+const chalk = require('chalk'); // Allows for coloring for logging
+const source = require('vinyl-source-stream'); // Vinyl stream support
+const buffer = require('vinyl-buffer'); // Vinyl stream support
+const watchify = require('watchify'); // Watchify for source changes
+const merge = require('utils-merge'); // Object merge tool
+const duration = require('gulp-duration'); // Time aspects of your gulp process
 
-// build parameters
-
-const sourceDir='src/web';
-const targetDir='build';
+// Configuration for Gulp
+const paths = {
+  sourceDir: './src/web',
+  targetDir: './build/'
+};
+const config = {
+	source: paths.sourceDir+'/index.js',
+	target: paths.targetDir,
+	watch: paths.sourceDir+'/**/*',
+	outputFile: 'build.js'
+}
 const staticResourceTypes=['html','css','jpg','png'];
-	
-// build functions
+const staticTypeMatchers=staticResourceTypes.map(type=> paths.sourceDir+'/**/*.'+type);
 
-var bundler = watchify(browserify(sourceDir+'/index.js', { debug: true }).transform(babel, {presets: ['es2015']}));
-var staticTypeMatchers=staticResourceTypes.map(type=> sourceDir+'/**/*.'+type);
+// Error reporting function
+function mapError(err) {
+  if (err.fileName) {
+    // Regular error
+    gutil.log(chalk.red(err.name)
+      + ': ' + chalk.yellow(err.fileName.replace(__dirname + '/src/js/', ''))
+      + ': ' + 'Line ' + chalk.magenta(err.lineNumber)
+      + ' & ' + 'Column ' + chalk.magenta(err.columnNumber || err.column)
+      + ': ' + chalk.blue(err.description));
+  } else {
+    // Browserify error..
+    gutil.log(chalk.red(err.name)
+      + ': '
+      + chalk.yellow(err.message));
+  }
+}
 
+// clean build target
 function cleanTarget() {
-	return gulp.src(targetDir, {read: false}).pipe(clean());
-}
-function compile() {
-	return bundler.bundle()
-      .on('error', function(err) { console.error(err); this.emit('end'); })
-      .pipe(source('main.js'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(targetDir));
+	return gulp.src(paths.targetDir, {read: false}).pipe(clean());
 }
 
+// copy resources
 function copyResources() {
 	return gulp.src(staticTypeMatchers)
-		.pipe(gulp.dest(targetDir));
+		.pipe(gulp.dest(paths.targetDir));
 }
 
-function watch() {
-	bundler.on('update', function() {
-		log('changes detected, bundling...');
-		compile();
-	});
-	gulp.watch(staticTypeMatchers,function() {
-		log('changes detected, copying static resources...');
+// Completes the final file outputs
+function bundle(bundler) {
+  var bundleTimer = duration('Javascript bundle time');
+
+  bundler
+    .bundle()
+    .on('error', mapError) // Map error reporting
+    .pipe(source('main.jsx')) // Set source name
+    .pipe(buffer()) // Convert to gulp pipeline
+    .pipe(rename(config.outputFile)) // Rename the output file
+    .pipe(sourcemaps.init({loadMaps: true})) // Extract the inline sourcemaps
+    .pipe(sourcemaps.write('./map')) // Set folder for sourcemaps to output to
+    .pipe(gulp.dest(paths.targetDir)) // Set the output folder
+    .pipe(notify({
+      message: 'Generated file: <%= file.relative %>',
+    })) // Output the file being created
+    .pipe(bundleTimer) // Output time timing of the file creation
+    .pipe(livereload()); // Reload the view in the browser
+}
+
+// Gulp task for build
+gulp.task('default', function() {
+  livereload.listen(); // Start livereload server
+  var args = merge(watchify.args, { debug: true }); // Merge in default watchify args with browserify arguments
+  
+  cleanTarget();
+
+  var bundler = browserify(config.source, args) // Browserify
+    .plugin(watchify, {ignoreWatch: ['**/node_modules/**', '**/bower_components/**']}) // Watchify to watch source file changes
+    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
+  
+   copyResources();
+   gulp.watch(staticTypeMatchers,function() {
+		console.log('changes detected, copying static resources...');
 		copyResources();
 	});
-};
+	
+	  bundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
 
-function startServer() {
-	connect.server({
-		root: targetDir,
-		port: 4000
-	})
-}
-
-function log(message) {
-	var date=new Date();
-	var pad= x=> x<10? '0'+x:x;
-	var time=pad(date.getHours())+':'+pad(date.getMinutes())+':'+pad(date.getSeconds());
-	console.log('['+time+'] '+message);
-}
-
-// build tasks
-
-gulp.task('watch', function() { return watch(); });
-gulp.task('startServer', function() { return startServer(); });
-gulp.task('rebuild', function(){
-	clean();
-	copyResources();
-	compile();
+    bundler.on('update', function() {
+    bundle(bundler); // Re-run bundle on source updates
+  });
 });
-gulp.task('build', function(){
-	clean();
-	copyResources();
-	compile().pipe(exit());
-});
-gulp.task('default', ['rebuild', 'watch', 'startServer']);
