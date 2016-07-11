@@ -16,6 +16,7 @@ const watchify = require('watchify');
 const merge = require('utils-merge'); 
 const source = require('vinyl-source-stream'); 
 const buffer = require('vinyl-buffer');
+const concatcss = require('gulp-concat-css');
 
 const browserSync = require('browser-sync').create();
 
@@ -24,7 +25,8 @@ const config = {
 	source: './src/web',
 	target: './build/',
 	javascriptSource: 'index.js',
-	javascriptTarget: 'build.js'
+	javascriptTarget: 'build.js',
+	cssTarget: 'style.css'
 }
 const sourceTypes=['js','json'];
 const stylesheetTypes=['css', 'scss'];
@@ -49,10 +51,8 @@ function copyStatic() {
 function compileStylesheets() {
   return gulp.src(fileTypeMatcher(stylesheetTypes))
     .pipe(sass().on('error', sass.logError))
-	.pipe(autoprefixer({
-		browsers: ['last 2 versions'],
-		cascade: false
-	}))
+	.pipe(autoprefixer())
+	.pipe(concatcss(config.cssTarget))
     .pipe(gulp.dest(config.target));
 }
 
