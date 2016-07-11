@@ -1,0 +1,31 @@
+body{
+  padding-top: 50px;
+}
+#title   {
+	background-color: #53132a;
+	background: -linear-gradient(-12deg, #55152a 0%, #c24636 20%, #dd7a48 40%, #ebb07b 60%, #ebb07b 70%, #c24636 80%, #7F1734 90%);
+	background-attachment: fixed;
+	box-shadow: inset 0px -5px 10px 0px rgba(0,0,0,0.4);
+	
+	h1, h2, h3, h4, h5, h6 {
+		color: #FFFFFF;
+		text-shadow: 0 0 15px rgba(0,0,0,0.6);
+		line-height: 120%;
+		margin: 0;
+	}
+	.container-fluid, .container {
+		xpadding: 25px 15px;
+	}
+	.jumbotron {	
+		background: inherit;
+		margin: 0;
+		padding: 25px 0;
+	}
+}
+
+.huge {
+    font-size: 40px;
+}
+.icon-huge {
+    font-size: 50px;
+}

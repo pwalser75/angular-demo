@@ -7,6 +7,8 @@ const rename = require('gulp-rename');
 const jshint = require('gulp-jshint');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
+const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps'); 
 const babelify = require('babelify'); 
 const browserify = require('browserify');
@@ -14,7 +16,8 @@ const watchify = require('watchify');
 const merge = require('utils-merge'); 
 const source = require('vinyl-source-stream'); 
 const buffer = require('vinyl-buffer');
-const browserSync = require('browser-sync');
+
+const browserSync = require('browser-sync').create();
 
 // Configuration
 const config = {
@@ -24,7 +27,8 @@ const config = {
 	javascriptTarget: 'build.js'
 }
 const sourceTypes=['js','json'];
-const resourceTypes=['html','css','jpg','png'];
+const stylesheetTypes=['css', 'scss'];
+const staticTypes=['html','jpg','png'];
 
 function fileTypeMatcher(fileSuffixArray) {
 	return fileSuffixArray.map(type=> config.source+'/**/*.'+type);
@@ -36,9 +40,20 @@ function cleanTarget() {
 }
 
 // copy static resources
-function copyResources() {
-	return gulp.src(fileTypeMatcher(resourceTypes))
+function copyStatic() {
+	return gulp.src(fileTypeMatcher(staticTypes))
 		.pipe(gulp.dest(config.target));
+}
+
+// compile style sheets
+function compileStylesheets() {
+  return gulp.src(fileTypeMatcher(stylesheetTypes))
+    .pipe(sass().on('error', sass.logError))
+	.pipe(autoprefixer({
+		browsers: ['last 2 versions'],
+		cascade: false
+	}))
+    .pipe(gulp.dest(config.target));
 }
 
 // Completes the final file outputs
@@ -49,7 +64,7 @@ function bundle() {
 	var bundler = browserify(config.source+'/'+config.javascriptSource, args) // Browserify
     .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
 
-	bundler
+	return bundler
 		.bundle()
 		.pipe(source(config.javascriptSource)) 
 		.pipe(jshint())
@@ -63,21 +78,31 @@ function bundle() {
 }
 
 gulp.task('clean', function() { return cleanTarget(); });
+
 gulp.task('build', ['clean'], function(){
-	copyResources();
+	copyStatic();
+	compileStylesheets();
 	bundle();
 });
-gulp.task('watch', ['build'], function() { 
 
-	gulp.watch(fileTypeMatcher(sourceTypes),function() {
-		bundle();
-		gulp.src('').pipe(notify('Updated sources'));
+gulp.task('watch', ['build'], function() { 
+	
+	gulp.watch(fileTypeMatcher(staticTypes),function() {
+		copyStatic()
+			.pipe(browserSync.stream())
+			.pipe(notify({message: 'Updated resources', onLast: true }));
 	});
-	gulp.watch(fileTypeMatcher(resourceTypes),function() {
-		copyResources();
-		gulp.src('').pipe(notify('Updated resources'));
+	gulp.watch(fileTypeMatcher(stylesheetTypes),function() {
+		compileStylesheets()
+			.pipe(browserSync.stream())
+			.pipe(notify({message: 'Updated stylesheets', onLast: true }));
+	});
+	gulp.watch(fileTypeMatcher(sourceTypes),function() {
+		bundle()
+			.pipe(notify({message: 'Updated sources', onLast: true }));
 	});
 });
+
 gulp.task('server', ['watch'], function() {
 	
 	browserSync.init([], {
@@ -86,4 +111,5 @@ gulp.task('server', ['watch'], function() {
       }
    });
 });
+
 gulp.task('default', ['server']);
