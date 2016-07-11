@@ -1,116 +1,89 @@
-/*
- Script by http://mikevalstar.com/post/fast-gulp-browserify-babelify-watchify-react-build/
-*/
-
 'use strict';
 
 const gulp = require('gulp');  // Base gulp package
 const clean = require('gulp-clean');
-const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
-const browserify = require('browserify'); // Providers "require" support, CommonJS
-const notify = require('gulp-notify'); // Provides notification to both the console and Growel
-const rename = require('gulp-rename'); // Rename sources
-const sourcemaps = require('gulp-sourcemaps'); // Provide external sourcemap files
-const livereload = require('gulp-livereload'); // Livereload support for the browser
-const gutil = require('gulp-util'); // Provides gulp utilities, including logging and beep
-const chalk = require('chalk'); // Allows for coloring for logging
-const source = require('vinyl-source-stream'); // Vinyl stream support
-const buffer = require('vinyl-buffer'); // Vinyl stream support
-const watchify = require('watchify'); // Watchify for source changes
-const merge = require('utils-merge'); // Object merge tool
-const duration = require('gulp-duration'); // Time aspects of your gulp process
+const notify = require('gulp-notify');
+const rename = require('gulp-rename');
+const jshint = require('gulp-jshint');
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps'); 
+const babelify = require('babelify'); 
+const browserify = require('browserify');
+const watchify = require('watchify');
+const merge = require('utils-merge'); 
+const source = require('vinyl-source-stream'); 
+const buffer = require('vinyl-buffer');
+const browserSync = require('browser-sync');
 
-// Configuration for Gulp
-const paths = {
-  sourceDir: './src/web',
-  targetDir: './build/'
-};
+// Configuration
 const config = {
-	source: paths.sourceDir+'/index.js',
-	target: paths.targetDir,
-	watch: paths.sourceDir+'/**/*',
-	outputFile: 'build.js'
+	source: './src/web',
+	target: './build/',
+	javascriptSource: 'index.js',
+	javascriptTarget: 'build.js'
 }
-const staticResourceTypes=['html','css','jpg','png'];
-const staticTypeMatchers=staticResourceTypes.map(type=> paths.sourceDir+'/**/*.'+type);
+const sourceTypes=['js','json'];
+const resourceTypes=['html','css','jpg','png'];
 
-// Error reporting function
-function mapError(err) {
-  if (err.fileName) {
-    // Regular error
-    gutil.log(chalk.red(err.name)
-      + ': ' + chalk.yellow(err.fileName.replace(__dirname + '/src/js/', ''))
-      + ': ' + 'Line ' + chalk.magenta(err.lineNumber)
-      + ' & ' + 'Column ' + chalk.magenta(err.columnNumber || err.column)
-      + ': ' + chalk.blue(err.description));
-  } else {
-    // Browserify error..
-    gutil.log(chalk.red(err.name)
-      + ': '
-      + chalk.yellow(err.message));
-  }
+function fileTypeMatcher(fileSuffixArray) {
+	return fileSuffixArray.map(type=> config.source+'/**/*.'+type);
 }
 
 // clean build target
 function cleanTarget() {
-	return gulp.src(paths.targetDir, {read: false}).pipe(clean());
+	return gulp.src(config.target, {read: false}).pipe(clean());
 }
 
-// copy resources
+// copy static resources
 function copyResources() {
-	gulp.src(staticTypeMatchers)
-		.pipe(gulp.dest(paths.targetDir));
+	return gulp.src(fileTypeMatcher(resourceTypes))
+		.pipe(gulp.dest(config.target));
 }
 
 // Completes the final file outputs
-function bundle(bundler) {
-  var bundleTimer = duration('Javascript bundle time');
+function bundle() {
+	
+	var args = merge(watchify.args, { debug: true }); // Merge in default watchify args with browserify arguments
+  
+	var bundler = browserify(config.source+'/'+config.javascriptSource, args) // Browserify
+    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
 
-  bundler
-    .bundle()
-    .on('error', mapError) // Map error reporting
-    .pipe(source('main.jsx')) // Set source name
-    .pipe(buffer()) // Convert to gulp pipeline
-    .pipe(rename(config.outputFile)) // Rename the output file
-    .pipe(sourcemaps.init({loadMaps: true})) // Extract the inline sourcemaps
-    .pipe(sourcemaps.write('./map')) // Set folder for sourcemaps to output to
-    .pipe(gulp.dest(paths.targetDir)) // Set the output folder
-    .pipe(notify({
-      message: 'Generated file: <%= file.relative %>',
-    })) // Output the file being created
-    .pipe(bundleTimer) // Output time timing of the file creation
-    .pipe(livereload()); // Reload the view in the browser
+	bundler
+		.bundle()
+		.pipe(source(config.javascriptSource)) 
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'))
+		.pipe(buffer())
+		.pipe(rename(config.javascriptTarget))
+		.pipe(sourcemaps.init({loadMaps: true})) 
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./map'))
+		.pipe(gulp.dest(config.target)); 
 }
 
-function startServer() {
-	connect.server({
-		root: targetDir,
-		port: 4000
-	})
-};
-
-gulp.task('startServer', function() { return startServer(); });
-
-// Gulp task for build
-gulp.task('default', function() {
-  livereload.listen(); // Start livereload server
-  var args = merge(watchify.args, { debug: true }); // Merge in default watchify args with browserify arguments
-  
-  
-  var bundler = browserify(config.source, args) // Browserify
-    .plugin(watchify, {ignoreWatch: ['**/node_modules/**', '**/bower_components/**']}) // Watchify to watch source file changes
-    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
-  
-    cleanTarget();
+gulp.task('clean', function() { return cleanTarget(); });
+gulp.task('build', ['clean'], function(){
 	copyResources();
-    bundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
+	bundle();
+});
+gulp.task('watch', ['build'], function() { 
 
-	gulp.watch(staticTypeMatchers,function() {
+	gulp.watch(fileTypeMatcher(sourceTypes),function() {
+		bundle();
+		gulp.src('').pipe(notify('Updated sources'));
+	});
+	gulp.watch(fileTypeMatcher(resourceTypes),function() {
 		copyResources();
 		gulp.src('').pipe(notify('Updated resources'));
 	});
-	
-    bundler.on('update', function() {
-		bundle(bundler); // Re-run bundle on source updates
-	  });
 });
+gulp.task('server', ['watch'], function() {
+	
+	browserSync.init([], {
+      server: {
+         baseDir: config.target
+      }
+   });
+});
+gulp.task('default', ['server']);
