@@ -1,6 +1,6 @@
 'use strict';
 
-const gulp = require('gulp');  // Base gulp package
+const gulp = require('gulp'); 
 const clean = require('gulp-clean');
 const notify = require('gulp-notify');
 const rename = require('gulp-rename');
@@ -22,88 +22,95 @@ const url = require('url');
 const proxy = require('proxy-middleware');
 
 // Configuration
+
 const config = {
 	source: './src/web',
 	target: './build/',
-	javascriptSource: 'index.js',
-	javascriptTarget: 'build.js',
-	cssTarget: 'style.css',
+	javascript: {
+		source: 'index.js',
+		target: 'build.js'
+	},
+	css: {
+		target: 'style.css'
+	},
 	proxy: {
-		url: 'http://localhost:8080/contacts/api',
+		url: 'http://localhost:8080/test/api',
 		route: '/api'
+	},
+	filetypes: {
+		javascript: ['js','json'],
+		stylesheet: ['css', 'scss'],
+		resources:  ['html','jpg','png','svg','woff','woff2']
 	}
-}
-const sourceTypes=['js','json'];
-const stylesheetTypes=['css', 'scss'];
-const staticTypes=['html','jpg','png','svg','woff','woff2'];
+};
+
+// Build functions
 
 function fileTypeMatcher(fileSuffixArray) {
 	return fileSuffixArray.map(type=> config.source+'/**/*.'+type);
 }
 
-// clean build target
 function cleanTarget() {
 	return gulp.src(config.target, {read: false}).pipe(clean());
 }
 
-// copy static resources
 function copyStatic() {
-	return gulp.src(fileTypeMatcher(staticTypes))
+	return gulp.src(fileTypeMatcher(config.filetypes.resources))
 		.pipe(gulp.dest(config.target));
 }
 
-// compile style sheets
 function compileStylesheets() {
-  return gulp.src(fileTypeMatcher(stylesheetTypes))
+  return gulp.src(fileTypeMatcher(config.filetypes.stylesheet))
     .pipe(sass().on('error', sass.logError))
 	.pipe(autoprefixer())
-	.pipe(concatcss(config.cssTarget))
+	.pipe(concatcss(config.css.target))
     .pipe(gulp.dest(config.target));
 }
 
-// Completes the final file outputs
-function bundle() {
+function bundleJavascript() {
 	
-	var args = merge(watchify.args, { debug: true }); // Merge in default watchify args with browserify arguments
+	var args = merge(watchify.args, { debug: true });
   
-	var bundler = browserify(config.source+'/'+config.javascriptSource, args) // Browserify
-    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
+	var bundler = browserify(config.source+'/'+config.javascript.source, args)
+	             .transform(babelify, {presets: ['es2015', 'react']});
 
 	return bundler
 		.bundle()
-		.pipe(source(config.javascriptSource)) 
+		.pipe(source(config.javascript.source)) 
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(buffer())
-		.pipe(rename(config.javascriptTarget))
+		.pipe(rename(config.javascript.target))
 		.pipe(sourcemaps.init({loadMaps: true})) 
 		.pipe(uglify())
 		.pipe(sourcemaps.write('./map'))
 		.pipe(gulp.dest(config.target)); 
 }
 
+// build targets
+
 gulp.task('clean', function() { return cleanTarget(); });
 
 gulp.task('build', ['clean'], function(){
 	copyStatic();
 	compileStylesheets();
-	bundle();
+	bundleJavascript();
 });
 
 gulp.task('watch', ['build'], function() { 
 	
-	gulp.watch(fileTypeMatcher(staticTypes),function() {
+	gulp.watch(fileTypeMatcher(config.filetypes.resources),function() {
 		copyStatic()
 			.pipe(browserSync.stream())
 			.pipe(notify({message: 'Updated resources', onLast: true }));
 	});
-	gulp.watch(fileTypeMatcher(stylesheetTypes),function() {
+	gulp.watch(fileTypeMatcher(config.filetypes.stylesheet),function() {
 		compileStylesheets()
 			.pipe(browserSync.stream())
 			.pipe(notify({message: 'Updated stylesheets', onLast: true }));
 	});
-	gulp.watch(fileTypeMatcher(sourceTypes),function() {
-		bundle()
+	gulp.watch(fileTypeMatcher(config.filetypes.javascript),function() {
+		bundleJavascript()
 			.pipe(notify({message: 'Updated sources', onLast: true }));
 	});
 });
