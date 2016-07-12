@@ -12,7 +12,7 @@ npm install -g gulp
 ```
 
 ## Build / Run
-Build and run local server (accessible on [http://localhost:4000](http://localhost:400)):
+Build and run local server (accessible on [http://localhost:3000](http://localhost:3000)):
 ```
 gulp
 ```
