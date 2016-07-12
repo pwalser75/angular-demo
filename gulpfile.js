@@ -35,7 +35,7 @@ const config = {
 }
 const sourceTypes=['js','json'];
 const stylesheetTypes=['css', 'scss'];
-const staticTypes=['html','jpg','png'];
+const staticTypes=['html','jpg','png','svg','woff','woff2'];
 
 function fileTypeMatcher(fileSuffixArray) {
 	return fileSuffixArray.map(type=> config.source+'/**/*.'+type);
