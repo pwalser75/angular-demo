@@ -13,6 +13,12 @@
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
 			<a href="#" ui-sref="index" class="navbar-left">
 				<img src="images/computer.png" style="width:48px; margin-right: 10px"> 
 			</a>
@@ -47,9 +53,13 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p>Some content in the modal.</p>
+		<img src="images/computer.png" class="liquid">
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Create</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Proceed</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

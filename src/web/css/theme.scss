@@ -3,59 +3,6 @@ body {
 	background: radial-gradient(circle farthest-corner at 50% 30%, #FFFFFF 50%, #cfd0d4 90%);
 	background-attachment: fixed;
 }
-.console {
-	display: block;
-	background-color: #333333;
-	color: #C7C7CF;
-	font-size: 90%;
-	font-weight: 600;
-	border-radius: 5px;
-	padding: 1em;
-	overflow: auto;
+img.liquid {
 	max-width: 100%;
 }
-.item-icon {
-	padding: 0 5px 0 0;
-}
-.item-text {
-	padding: 0;
-	display: inline-block;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-.single-line {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-/* List item component */
-.list-item {
-	display: flex;
-	margin: 10px 0;
-	
-	h1, h2, h3 {
-		margin: 0 0 5px 0;
-		font-weight: 700;
-	}
-	h1 {
-		font-size: 160%;
-	}
-	h2 {
-		font-size: 140%;
-	}
-	h3 {
-		font-size: 120%;
-	}
-	.list-item-icon {
-		flex: 0;
-		margin: 0 10px 0 0;
-	}
-	.list-item-content {
-		flex: 1;
-		margin: 0;
-		padding: 0;
-	}
-}
-
