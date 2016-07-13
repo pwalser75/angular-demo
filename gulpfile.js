@@ -26,6 +26,10 @@ const proxy = require('proxy-middleware');
 const config = {
 	source: './src/web',
 	target: './build/',
+	libs: {
+		source: 'lib/**/*',
+		target: 'lib'
+	},
 	javascript: {
 		source: 'index.js',
 		target: 'build.js'
@@ -67,12 +71,17 @@ function compileStylesheets() {
     .pipe(gulp.dest(config.target));
 }
 
+function copyLibs() {
+	return gulp.src(config.source+'/'+config.libs.source)
+		.pipe(gulp.dest(config.target+'/'+config.libs.target));
+}
+
 function bundleJavascript() {
 	
 	var args = merge(watchify.args, { debug: true });
   
 	var bundler = browserify(config.source+'/'+config.javascript.source, args)
-	             .transform(babelify, {presets: ['es2015', 'react']});
+	             .transform(babelify, {presets: ['es2015', 'react']})
 
 	return bundler
 		.bundle()
@@ -93,6 +102,7 @@ gulp.task('clean', function() { return cleanTarget(); });
 
 gulp.task('build', ['clean'], function(){
 	copyStatic();
+	copyLibs();
 	compileStylesheets();
 	bundleJavascript();
 });
@@ -112,6 +122,10 @@ gulp.task('watch', ['build'], function() {
 	gulp.watch(fileTypeMatcher(config.filetypes.javascript),function() {
 		bundleJavascript()
 			.pipe(notify({message: 'Updated sources', onLast: true }));
+	});
+	gulp.watch(config.source+'/'+config.libs.source,function() {
+		copyLibs()
+			.pipe(notify({message: 'Updated libs', onLast: true }));
 	});
 });
 

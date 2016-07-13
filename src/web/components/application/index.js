@@ -1,4 +1,6 @@
 import angular from 'angular';
+import jquery from 'jquery';
+import bootstrap from 'bootstrap';
 import angularUiRouter from 'angular-ui-router';
 import applicationState from './application-state';
 import applicationController from './application-controller';
