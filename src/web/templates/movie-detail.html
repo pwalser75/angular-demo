@@ -4,10 +4,10 @@
 <p>
 <div class="row">
 	
-	 <div class="col-lg-3">
-		<img ng-src="{{movieDetailController.movie.image}}" style="height:320px">
+	 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+		<img ng-src="{{movieDetailController.movie.image}}" style="width: 100%">
 	 </div>
-	 <div class="col-lg-6">
+	 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
 		<b>{{movieDetailController.movie.year}}</b> | {{movieDetailController.movie.genres | commaSeparated}}<br>
 		<rating value="movieDetailController.movie.rating" max="10"></rating>&nbsp;<b>{{movieDetailController.movie.rating}}</b>/10
 		<p>
