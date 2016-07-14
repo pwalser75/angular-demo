@@ -7,29 +7,33 @@
 	
     <title>Angular JS Demo</title>
 	<link rel="stylesheet" href="style.css">
+	
+	
   </head>
   <body>
   
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
       <div class="container">
-        <div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="#" ui-sref="index" class="navbar-left">
-				<img src="images/computer.png" style="width:48px; margin-right: 10px"> 
-			</a>
-			<a href="#" ui-sref="index" class="navbar-brand">
-				<b>Angular</b> Demo Project
-			</a>
-        </div>
-		 <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav" ui-view="menu">
-		  </ul>
-		</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<img src="images/computer.png" style="width:48px; margin-right: 10px;"> 
+				<a class="navbar-brand" href="#" ui-sref="index">
+					<b>Angular</b> Demo Project
+				</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav" ui-view="menu">
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
       </div>	 
     </nav>
   
@@ -68,8 +72,17 @@
   </div>
 </div>
 
-    <script src="lib/bootstrap.min.js"></script>
     <script src="lib/jquery-3.0.0.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
     <script src="build.js"></script>
+	<script>
+		// auto-collapse navbar on click
+		$(document).on('click','.navbar-collapse.in',function(e) {
+			if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
+				$(this).collapse('hide');
+			}
+		});
+	
+	</script>
   </body>
 </html>
