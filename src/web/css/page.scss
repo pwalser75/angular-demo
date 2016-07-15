@@ -79,12 +79,21 @@ body{
 		padding: 0;
 	}
 }
-
-
-
-.huge {
-    font-size: 40px;
+.size-xs {
+    font-size: 0.8em;
 }
-.icon-huge {
-    font-size: 50px;
+.size-s {
+    font-size: 0.9em;
+}
+.size-m {
+    font-size: 1em;
+}
+.size-l {
+    font-size: 1.4em;
+}
+.size-xl {
+    font-size: 2em;
+}
+.size-xxl {
+    font-size: 3em;
 }
