@@ -27,10 +27,10 @@ const RatingComponent = {
 	},
 	controller: RatingComponentController,
 	template: '<span>'+
-		'<span ng-repeat="i in $ctrl.createRangeArray(1, $ctrl.getStarsFilled())" class="glyphicon glyphicon-star" style="color:#FFC901">'+
-		'</span>'+
-		'<span ng-repeat="i in $ctrl.createRangeArray($ctrl.getStarsFilled()+1, $ctrl.getStarsMax())" class="glyphicon glyphicon-star-empty" style="color:#DDDDDD">'+
-		'</span>'+
+		'<i ng-repeat="i in $ctrl.createRangeArray(1, $ctrl.getStarsFilled())" class="fa fa-star" style="color:#FFC901">'+
+		'</i>'+
+		'<i ng-repeat="i in $ctrl.createRangeArray($ctrl.getStarsFilled()+1, $ctrl.getStarsMax())" class="fa fa-star-o" style="color:#DDDDDD">'+
+		'</i>'+
 		'</span>'
 };
 
