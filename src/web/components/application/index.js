@@ -2,8 +2,8 @@ import angular from 'angular';
 import jquery from 'jquery';
 import bootstrap from 'bootstrap';
 import angularUiRouter from 'angular-ui-router';
-import applicationState from './application-state';
-import applicationController from './application-controller';
+import state from './state';
+import controller from './controller';
 import movieComponent from '../movie/index';
 
 const dependencies = [
@@ -14,8 +14,8 @@ const dependencies = [
 
 export default angular
     .module('Application', dependencies)
-    .config(applicationState)
-    .controller('ApplicationController', applicationController)
+    .config(state)
+    .controller('ApplicationController', controller)
 	.run(['$state', function ($state) {
 		$state.transitionTo('index');
 	}]);

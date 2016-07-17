@@ -5,11 +5,11 @@ function detailRoute($stateProvider) {
             url: '/movies',
             views: {
                 application: {
-                    controller: 'MovieListController as movieListController',
+                    controller: 'MovieListController as ctrl',
                     templateUrl: 'templates/movie-list.html'
                 },
 				menu: {
-                    controller: 'MovieListController as movieListController',
+                    controller: 'MovieListController as ctrl',
                     templateUrl: 'templates/movies-menu.html'
                 }
             }

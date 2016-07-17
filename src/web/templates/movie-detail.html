@@ -1,20 +1,22 @@
-<h1>{{movieDetailController.movie.title}}</h1>
+<div class="container">
+	<h1>{{ctrl.movie.title}}</h1>
 
-<button ui-sref="movies"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
-<p>
-<div class="row">
-	
-	 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-		<img ng-src="{{movieDetailController.movie.image}}" style="width: 100%">
-	 </div>
-	 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
-		<div class="size-l">
-			<b>{{movieDetailController.movie.year}}</b> | {{movieDetailController.movie.genres | commaSeparated}}
-		</div>
-		<rating value="movieDetailController.movie.rating" max="10"></rating>&nbsp;<b>{{movieDetailController.movie.rating}}</b>/10
-		<p>
-		<br>
-		{{movieDetailController.movie.plot}}
-	 </div>
-	 
+	<button ui-sref="movies"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+	<p>
+	<div class="row">
+		
+		 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+			<img ng-src="{{ctrl.movie.image}}" style="width: 100%">
+		 </div>
+		 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+			<div class="size-l">
+				<b>{{ctrl.movie.year}}</b> | {{ctrl.movie.genres | commaSeparated}}
+			</div>
+			<rating value="ctrl.movie.rating" max="10"></rating>&nbsp;<b>{{ctrl.movie.rating}}</b>/10
+			<p>
+			<br>
+			{{ctrl.movie.plot}}
+		 </div>
+		 
+	</div>
 </div>

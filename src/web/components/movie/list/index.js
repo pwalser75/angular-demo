@@ -3,8 +3,8 @@ import angularUiRouter from 'angular-ui-router';
 
 import common from '../../common/index';
 
-import movieListState from './movie-list-state';
-import movieListController from './movie-list-controller';
+import state from './state';
+import controller from './controller';
 
 const dependencies = [
    'ui.router',
@@ -13,5 +13,5 @@ const dependencies = [
 
 export default angular
     .module('MovieList', dependencies)
-    .config(movieListState)
-    .controller('MovieListController', movieListController);
+    .config(state)
+    .controller('MovieListController', controller);

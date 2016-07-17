@@ -6,11 +6,11 @@ function detailRoute($stateProvider) {
             url: '/',
             views: {
                 application: {
-                    controller: 'ApplicationController as applicationController',
+                    controller: 'ApplicationController as ctrl',
                     templateUrl: 'templates/application.html'
                 },
 				menu: {
-                    controller: 'ApplicationController as applicationController',
+                    controller: 'ApplicationController as ctrl',
                     templateUrl: 'templates/default-menu.html'
                 }
             }
