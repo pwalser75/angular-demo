@@ -1,7 +1,101 @@
-<div class="container">
-	<h1>{{ctrl.movie.title}}</h1>
+<div class="navbar navbar-default">
+	<div class="container">
+		<ul class="nav navbar-nav ">
+			<li>
+				<a href="#"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Edit</a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-print" aria-hidden="true"></i> Print</a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-share-alt" aria-hidden="true"></i> Share</a>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Other <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="#"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stack Overflow</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="#"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i> Facebook</a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i> Twitter</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
 
-	<button ui-sref="movies"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+
+<div class="container">	
+
+	<div class="btn-group" role="group" aria-label="..." style="margin: 1em 0;">
+			<button type="button" class="btn btn-default">
+				<i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Edit
+			</button>
+			<button type="button" class="btn btn-default">
+				<i class="fa fa-fw fa-print" aria-hidden="true"></i> Print
+			</button>
+			<button type="button" class="btn btn-default">
+				<i class="fa fa-fw fa-share-alt" aria-hidden="true"></i> Share
+			</button>
+
+	  <div class="btn-group" role="group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  Other
+		  <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="#"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stack Overflow</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i> Facebook</a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i> Twitter</a>
+			</li>
+		</ul>
+	  </div>
+	</div>
+	<br>
+	
+	<div class="btn-group" role="group" aria-label="..." style="margin: 1em 0;">
+			<button type="button" class="btn btn-default">
+				<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>
+			</button>
+			<button type="button" class="btn btn-default">
+				<i class="fa fa-fw fa-print" aria-hidden="true"></i>
+			</button>
+
+	  <div class="btn-group" role="group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-fw fa-share-alt" aria-hidden="true"></i>
+		</button>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="#"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stack Overflow</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i> Facebook</a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i> Twitter</a>
+			</li>
+		</ul>
+	  </div>
+	</div>
+	<br>
+	
+	<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+	<i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i>
+	<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+
 	<p>
 	<div class="row">
 		
@@ -9,6 +103,7 @@
 			<img ng-src="{{ctrl.movie.image}}" style="width: 100%">
 		 </div>
 		 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+			<h1>{{ctrl.movie.title}}</h1>
 			<div class="size-l">
 				<b>{{ctrl.movie.year}}</b> | {{ctrl.movie.genres | commaSeparated}}
 			</div>
