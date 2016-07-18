@@ -6,7 +6,12 @@ function detailRoute($stateProvider) {
             views: {
                 application: {
                     controller: 'MovieDetailController as ctrl',
-                    templateUrl: 'templates/movie-detail.html'
+                    templateUrl: 'templates/movie-detail.html',
+					resolve: {
+                        movie: ['MovieService', '$stateParams', function(movieService, $stateParams) {
+                            return movieService.getMovie($stateParams.id);
+                        }]
+                    }
                 },
 				menu: {
                     controller: 'ApplicationController as ctrl',

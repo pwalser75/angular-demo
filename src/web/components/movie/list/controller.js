@@ -1,9 +1,9 @@
 class MovieListController {
 	
-    constructor(movieService) {
-		this.movieService=movieService;
+    constructor(movies) {
+		this.movies=movies;
     }
 }
 
-MovieListController.$inject=['MovieService'];
+MovieListController.$inject=['movies'];
 export default MovieListController;

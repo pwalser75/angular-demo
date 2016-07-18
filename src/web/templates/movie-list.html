@@ -1,7 +1,7 @@
 <div class="container">
 	<h1>Movies</h1>
 
-	<div class="list-item" ng-repeat="movie in ctrl.movieService.getMovies()">
+	<div class="list-item" ng-repeat="movie in ctrl.movies">
 		<span class="list-item-icon">
 			<a href="#" ui-sref="movieDetail({id: movie.id})">
 				<img ng-src="{{movie.image}}" style="height:120px; ">

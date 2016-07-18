@@ -1,11 +1,8 @@
 class MovieDetailController {
 	
-    constructor(movieService, $stateParams) {
-		this.movieService=movieService;
-		if ($stateParams.id){
-			this.movie=movieService.getMovie($stateParams.id);
-		}
+    constructor(movie) {
+		this.movie=movie;
     }
 }
-MovieDetailController.$inject=['MovieService','$stateParams'];
+MovieDetailController.$inject=['movie'];
 export default MovieDetailController;
