@@ -2,11 +2,13 @@
 Demo project, experimenting with modularized AngularJS.
 
 ## Setup
+This project requires Node.js for the build process (download 'latest' from https://nodejs.org).
+
 Install node module dependencies:
 ```
 npm install
 ```
-Install gulp on your system (execute as admin user)
+Install gulp on your system (run as admin user)
 ```
 npm install -g gulp
 ```
