@@ -1,5 +1,5 @@
 # AngularJS demo project
-Demo project, experimenting with modularized AngularJS.
+Demo project/showcase/template, experimenting with modularized AngularJS.
 
 ## Setup
 Install node module dependencies:
@@ -20,3 +20,7 @@ Build only (target folder: `./build`):
 ```
 gulp build
 ```
+
+## Notes
+
+ - For keeping the Node modules/dependencies up-to-date, use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
