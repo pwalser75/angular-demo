@@ -1,0 +1,64 @@
+/*
+	plugins {
+	  id "com.moowork.gulp" version "1.0.1"
+	}
+
+	apply plugin: "com.moowork.gulp"
+*/
+
+
+group = 'ch.frostnova'
+version = '1.0.0-SNAPSHOT'
+
+apply plugin: 'war'
+
+def npmCommand = 'npm'
+def gulpCommand = 'gulp'
+if (System.getProperty('os.name') != null && System.getProperty('os.name').toLowerCase().contains('win')) {
+    npmCommand = 'npm.cmd'
+    gulpCommand = 'gulp.cmd'
+}
+
+task npmInstall(type: Exec) {
+    commandLine npmCommand, 'install'
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
+task gulpBuild(type: Exec) {
+    commandLine gulpCommand, 'build'
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
+war {
+  with {
+    from( "${project.projectDir}/build/frontend" )
+  }
+}
+
+/*
+	node {
+		println "Node work dir: ${project.buildDir}"
+		version = '7.2.1'
+		download = true
+		workDir = file("${project.buildDir}")
+	}
+	gulp {
+		println "Gulp work dir: ${project.buildDir}"
+		workDir = file("${project.projectDir}")
+		colors = true
+	}
+
+	gulp_build.dependsOn 'installGulp'
+	gulp_build.dependsOn 'npmInstall'
+
+	build.dependsOn gulp_build
+*/
+
+gulpBuild.dependsOn npmInstall
+war.dependsOn gulpBuild

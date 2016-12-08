@@ -25,7 +25,7 @@ const proxy = require('proxy-middleware');
 
 const config = {
 	source: './src/web',
-	target: './build/',
+	target: './build/frontend',
 	libs: {
 		source: 'lib/**/*',
 		target: 'lib'

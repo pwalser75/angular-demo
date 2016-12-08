@@ -28,6 +28,12 @@ The project also contains a **Maven** POM, allowing it to be built using the `ma
 Usage:
 
     mvn clean install
+	
+## Build / Bundle with Gradle
+The project also contains a **Gradle** build descriptor, which (same as the Maven build)  bundles the application as a WAR file.
+Usage:
+
+    gradle build
 
 ## Notes
 
