@@ -1,19 +1,56 @@
-<div id="title" class="wallpaper">
-	<div class="container">
-		<div class="jumbotron">
-			<h1>{{ctrl.title}}</h1>
-			<h3>{{ctrl.message}}</h3>
-		</div>
-	</div>
+<nav id="navbar-top" class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="images/computer.png" style="width:48px; margin-right: 10px;">
+            <a class="navbar-brand" href="#" ui-sref="app.welcome">
+                <b>Angular</b> Demo Project
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" ui-view="menu">
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ui-view="userMenu">
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="main" ui-view="application">
+    Loading content...
+</div>
+<p>
+<p>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+<p>Some content in the modal.</p>
+<img src="images/computer.png" class="liquid">
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" data-dismiss="modal">Create</button>
+    <button type="button" class="btn btn-warning" data-dismiss="modal">Proceed</button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
 </div>
 
-<div class="container">
-	<p>
-	<ul ng-repeat="item in applicationController.data">
-		<li>
-			<b>{{item.title}}</b><br>
-			{{item.description}}
-		</li>
-	</ul>
-	<p>
+</div>
 </div>

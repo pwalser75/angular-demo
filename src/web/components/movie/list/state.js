@@ -1,19 +1,19 @@
 function detailRoute($stateProvider) {
 
-	 return $stateProvider
-        .state('movies', {
+    return $stateProvider
+        .state('app.movies', {
             url: '/movies',
             views: {
                 application: {
                     controller: 'MovieListController as ctrl',
                     templateUrl: 'templates/movie-list.html',
-					resolve: {
-                        movies: ['MovieService', function(movieService) {
+                    resolve: {
+                        movies: ['MovieService', function (movieService) {
                             return movieService.getMovies();
                         }]
                     }
                 },
-				menu: {
+                menu: {
                     controller: 'ApplicationController as ctrl',
                     templateUrl: 'templates/movies-menu.html'
                 }

@@ -1,20 +1,11 @@
-
 function detailRoute($stateProvider) {
 
-	 return $stateProvider
-        .state('index', {
-            url: '/',
-            views: {
-                application: {
-                    controller: 'ApplicationController as ctrl',
-                    templateUrl: 'templates/application.html'
-                },
-				menu: {
-                    controller: 'ApplicationController as ctrl',
-                    templateUrl: 'templates/default-menu.html'
-                }
+    return $stateProvider
+        .state('app', {
+                abstract: true,
+                templateUrl: 'templates/application.html'
             }
-        });
+        );
 }
 
 export default ['$stateProvider', detailRoute];

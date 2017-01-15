@@ -1,85 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="Application" strict-di="true">
-  <head>
+<head>
     <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
     <title>Angular JS Demo</title>
-	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-  </head>
-  <body>
-  
-  <nav id="navbar-top" class="navbar navbar-default navbar-static-top navbar-inverse">
-      <div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<img src="images/computer.png" style="width:48px; margin-right: 10px;"> 
-				<a class="navbar-brand" href="#" ui-sref="index">
-					<b>Angular</b> Demo Project
-				</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav" ui-view="menu">
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
-					<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-				</ul>
-			</div>
-      </div>	 
-    </nav>
-  
-		<div class="main" ui-view="application">
-			Loading content...
-		</div>
-	<p>
-	<p>
-			<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+</head>
+<body>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div ui-view></div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some content in the modal.</p>
-		<img src="images/computer.png" class="liquid">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Create</button>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Proceed</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+<script src="lib/jquery-3.0.0.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="build.js"></script>
+<script>
+    // auto-collapse navbar on click
+    $(document).on('click', '.navbar-collapse.in', function (e) {
+        if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
+            $(this).collapse('hide');
+        }
+    });
 
-  </div>
-</div>
-
-    <script src="lib/jquery-3.0.0.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
-    <script src="build.js"></script>
-	<script>
-		// auto-collapse navbar on click
-		$(document).on('click','.navbar-collapse.in',function(e) {
-			if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
-				$(this).collapse('hide');
-			}
-		});
-	
-	</script>
-  </body>
+</script>
+</body>
 </html>

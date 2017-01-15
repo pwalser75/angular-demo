@@ -1,16 +1,16 @@
 <div class="container">
-	<h1>Movies</h1>
+    <h1>Movies</h1>
 
-	<div class="list-item" ng-repeat="movie in ctrl.movies">
+    <div class="list-item" ng-repeat="movie in ctrl.movies">
 		<span class="list-item-icon">
-			<a href="#" ui-sref="movieDetail({id: movie.id})">
+			<a href="#" ui-sref="app.movieDetail({id: movie.id})">
 				<img ng-src="{{movie.image}}" style="height:120px; ">
 			</a>
 		</span>
-		<span class="list-item-content">
+        <span class="list-item-content">
 			<h1>{{movie.title}}</h1>
 			<b>{{movie.year}}</b> | {{movie.genres | commaSeparated}}<br>
 			<rating value="movie.rating" max="10"></rating>&nbsp;<b>{{movie.rating}}</b>/10
 		</span>
-	</div>
+    </div>
 </div>
