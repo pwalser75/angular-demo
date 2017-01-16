@@ -16,7 +16,7 @@
     </a>
 </li>
 <li ng-show="!ctrl.getUserContext().getUser()">
-    <a ng-click="ctrl.getUserContext().login()">
+    <a ui-sref="app.login">
         <i class="fa fa-sign-in" aria-hidden="true"></i> Login
     </a>
 </li>

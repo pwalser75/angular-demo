@@ -1,15 +1,20 @@
 import angular from "angular";
+import uiRouter from "angular-ui-router";
+import ngMessages from "angular-messages";
 import state from "./state";
 import errorHandling from "./error-handling";
 import controller from "./controller";
 import welcomeComponent from "../welcome/index";
+import loginComponent from "../login/index";
 import movieComponent from "../movie/index";
 import common from "../common/index";
 
 const dependencies = [
-    'ui.router',
+    uiRouter,
+    ngMessages,
     common.name,
     welcomeComponent.name,
+    loginComponent.name,
     movieComponent.name
 ];
 

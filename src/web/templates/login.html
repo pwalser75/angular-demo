@@ -1,0 +1,42 @@
+<div id="title" class="wallpaper">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Login</h1>
+            <h3>Please login with your user name and password</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form name="form" class="form-horizontal" ng-submit="ctrl.login()">
+        <div class="input-group validation"
+             ng-class="{mandatory: form.user.$error.required, error: form.user.$invalid && form.user.$dirty}">
+            <label>User name</label>
+            <input name="user" class="widget" type="text" ng-model="ctrl.user" placeholder="Please enter your user name"
+                   ng-minlength="3" ng-maxlength="20" required/>
+
+            <span ng-messages="form.user.$error" ng-show="form.user.$dirty">
+                <span ng-message="required">Name is required</span>
+                <span ng-message="minlength">Name is too short.</span>
+                <span ng-message="maxlength">Name is too long.</span>
+            </span>
+
+        </div>
+        <!--
+        <pre>form.user = {{ form.user | json }}</pre>
+        -->
+        <div class="input-group validation"
+             ng-class="{mandatory: form.password.$error.required, error: form.password.$invalid && form.password.$dirty}">
+            <label>Password</label>
+            <input name="password" class="widget" type="password" ng-model="ctrl.password"
+                   placeholder="Please enter your password"
+                   ng-minlength="6" ng-maxlength="20" required/>
+            <span ng-messages="form.password.$error" ng-show="form.password.$dirty">
+                <span ng-message="required">Password is required</span>
+                <span ng-message="minlength">Password is too short.</span>
+                <span ng-message="maxlength">Password is too long.</span>
+            </span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
