@@ -1,20 +1,12 @@
 class ApplicationController {
 
-    constructor() {
+    constructor(UserContext) {
+        this.UserContext = UserContext;
     }
 
-    login() {
-        this.user = {
-            name: "Test User"
-        }
-    }
-
-    logout() {
-        this.user = null;
-    }
-
-    getUser() {
-        return this.user;
+    getUserContext() {
+        return this.UserContext;
     }
 }
+ApplicationController.$inject = ['UserContext'];
 export default ApplicationController;

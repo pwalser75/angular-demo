@@ -16,6 +16,12 @@
         </li>
     </ul>
     <p>
+    <div ng-show="!ctrl.getUserContext().getUser()">
+        <h1>Welcome</h1>
+        please use the menu action to login.
+    </div>
+    <div ng-show="ctrl.getUserContext().getUser()">
+        <h1>Hello {{ctrl.getUserContext().getUser().name}}</h1>
+        nice to have you back!
+    </div>
 </div>
-
-USER: {{ctrl.user}}

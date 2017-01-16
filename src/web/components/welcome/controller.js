@@ -1,6 +1,7 @@
 class WelcomeController {
 
-    constructor() {
+    constructor(UserContext) {
+        this.UserContext = UserContext;
 
         this.title = "WelcomeController";
         this.message = "Hello from Angular";
@@ -19,5 +20,10 @@ class WelcomeController {
             }
         ];
     }
+
+    getUserContext() {
+        return this.UserContext;
+    }
 }
+WelcomeController.$inject = ['UserContext'];
 export default WelcomeController;

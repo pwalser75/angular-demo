@@ -1,21 +1,22 @@
-<li class="dropdown" ng-show="ctrl.user" ng-class="{ open : dd1 }" ng-init="dd1 = false" ng-click="dd1 = !dd1">
+<li class="dropdown" ng-show="ctrl.getUserContext().getUser()" ng-class="{ open : dd1 }" ng-init="dd1 = false"
+    ng-click="dd1 = !dd1">
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user" aria-hidden="true"></i> {{ctrl.user.name}}
+        <i class="fa fa-user" aria-hidden="true"></i> {{ctrl.getUserContext().getUser().name}}
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
         <li><a href="#">Account settings</a></li>
         <li role="separator" class="divider"></li>
-        <li><a ng-click="ctrl.logout()">Logout</a></li>
+        <li><a ng-click="ctrl.getUserContext().logout()">Logout</a></li>
     </ul>
 </li>
-<li ng-show="!ctrl.user">
-    <a ng-click="ctrl.login()">
+<li ng-show="!ctrl.getUserContext().getUser()">
+    <a ng-click="ctrl.getUserContext().login()">
         <i class="fa fa-user" aria-hidden="true"></i> Sign Up
     </a>
 </li>
-<li ng-show="!ctrl.user">
-    <a ng-click="ctrl.login()">
+<li ng-show="!ctrl.getUserContext().getUser()">
+    <a ng-click="ctrl.getUserContext().login()">
         <i class="fa fa-sign-in" aria-hidden="true"></i> Login
     </a>
 </li>
