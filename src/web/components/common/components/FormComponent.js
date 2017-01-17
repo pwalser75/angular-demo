@@ -1,18 +1,10 @@
-class FormComponentController {
-
-    constructor() {
-    }
-
-}
 const FormComponent = {
     restrict: 'E',
     bindings: {
-        inputname: '<',
-        label: '<',
-        hint: '<'
+        inputname: '@',
+        label: '@',
+        hint: '@'
     },
-    controller: FormComponentController,
-    controllerAs: 'widget',
     template: ['$element', '$attrs', function ($element, $attrs) {
         return '<div class="input-group validation" ng-class="{mandatory: form.' + $attrs.inputname + '.$error.required, error: form.' + $attrs.inputname + '.$invalid && form.' + $attrs.inputname + '.$dirty}">' +
             '<label>' + $attrs.label + '</label>' +

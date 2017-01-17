@@ -9,11 +9,12 @@
 
 <div class="container">
     <form name="form" class="form-horizontal" novalidate ng-submit="form.$valid && ctrl.login()">
+
         <!--
-                <formfield inputName="user" label="Username" hint="Please_enter_something"></formfield>
+        <formfield inputName="comment" label="Comment" hint="Component test, ignore this field"></formfield>
+-->
 
-                -->
-
+        <span>
         <div class="input-group validation"
              ng-class="{mandatory: form.user.$error.required, error: form.user.$invalid && form.user.$dirty}">
             <label>User name</label>
@@ -28,7 +29,7 @@
                     </span>
 
         </div>
-
+</span>
         <div class="input-group validation"
              ng-class="{mandatory: form.password.$error.required, error: form.password.$invalid && form.password.$dirty}">
             <label>Password</label>
