@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-    <form name="form" class="form-horizontal" ng-submit="ctrl.login()">
+    <form name="form" class="form-horizontal" novalidate ng-submit="form.$valid && ctrl.login()">
         <div class="input-group validation"
              ng-class="{mandatory: form.user.$error.required, error: form.user.$invalid && form.user.$dirty}">
             <label>User name</label>

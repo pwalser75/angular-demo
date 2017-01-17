@@ -26,6 +26,10 @@ gulp {
 	colors = true
 }
 
+task reset(type: Delete) {
+	delete 'node_modules'
+}
+
 gulp_build.inputs.dir file("${project.projectDir}/src")
 gulp_build.inputs.file file("${project.projectDir}/gulpfile.js")
 gulp_build.inputs.file file("${project.projectDir}/package.json")

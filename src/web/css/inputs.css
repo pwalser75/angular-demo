@@ -68,3 +68,7 @@
 .input-group.validation.mandatory > .widget {
     border-color: #007EC7;
 }
+
+input:invalid {
+    box-shadow: none;
+}
