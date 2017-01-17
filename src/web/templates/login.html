@@ -9,22 +9,26 @@
 
 <div class="container">
     <form name="form" class="form-horizontal" novalidate ng-submit="form.$valid && ctrl.login()">
+        <!--
+                <formfield inputName="user" label="Username" hint="Please_enter_something"></formfield>
+
+                -->
+
         <div class="input-group validation"
              ng-class="{mandatory: form.user.$error.required, error: form.user.$invalid && form.user.$dirty}">
             <label>User name</label>
-            <input name="user" class="widget" type="text" ng-model="ctrl.user" placeholder="Please enter your user name"
+            <input name="user" class="widget" type="text" ng-model="ctrl.user"
+                   placeholder="Please enter your user name"
                    ng-minlength="3" ng-maxlength="20" required/>
 
             <span ng-messages="form.user.$error" ng-show="form.user.$dirty">
-                <span ng-message="required">Name is required</span>
-                <span ng-message="minlength">Name is too short.</span>
-                <span ng-message="maxlength">Name is too long.</span>
-            </span>
+                        <span ng-message="required">Name is required</span>
+                        <span ng-message="minlength">Name is too short.</span>
+                        <span ng-message="maxlength">Name is too long.</span>
+                    </span>
 
         </div>
-        <!--
-        <pre>form.user = {{ form.user | json }}</pre>
-        -->
+
         <div class="input-group validation"
              ng-class="{mandatory: form.password.$error.required, error: form.password.$invalid && form.password.$dirty}">
             <label>Password</label>
