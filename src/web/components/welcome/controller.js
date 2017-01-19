@@ -1,29 +1,17 @@
 class WelcomeController {
 
-    constructor(UserContext) {
+    constructor(UserContext, exampleData) {
+
         this.UserContext = UserContext;
+        this.exampleData = exampleData;
 
         this.title = "WelcomeController";
         this.message = "Hello from Angular";
-        this.data = [
-            {
-                title: "First",
-                description: "This is the first item"
-            },
-            {
-                title: "Second",
-                description: "This is the second item"
-            },
-            {
-                title: "Third",
-                description: "This is the third item"
-            }
-        ];
     }
 
     getUserContext() {
         return this.UserContext;
     }
 }
-WelcomeController.$inject = ['UserContext'];
+WelcomeController.$inject = ['UserContext', 'exampleData'];
 export default WelcomeController;

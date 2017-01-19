@@ -6,7 +6,12 @@ function detailRoute($stateProvider) {
             views: {
                 application: {
                     controller: 'WelcomeController as ctrl',
-                    templateUrl: 'templates/welcome.html'
+                    templateUrl: 'templates/welcome.html',
+                    resolve: {
+                        exampleData: ['ExampleService', function (exampleService) {
+                            return exampleService.getData();
+                        }]
+                    }
                 },
                 menu: {
                     controller: 'ApplicationController as ctrl',

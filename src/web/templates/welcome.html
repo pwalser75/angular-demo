@@ -9,13 +9,6 @@
 
 <div class="container">
     <p>
-    <ul ng-repeat="item in applicationController.data">
-        <li>
-            <b>{{item.title}}</b><br>
-            {{item.description}}
-        </li>
-    </ul>
-    <p>
     <div ng-show="!ctrl.getUserContext().getUser()">
         <h1>Welcome</h1>
         please use the menu action to login.
@@ -24,4 +17,15 @@
         <h1>Hello {{ctrl.getUserContext().getUser().name}}</h1>
         nice to have you back!
     </div>
+    <p>
+    <h3>Data from ExampleService</h3>
+    <ul>
+        <li ng-repeat="item in ctrl.exampleData">
+            <b>{{item.commit.message}}</b>
+            <p class="size-s">
+                on <span class="label label-primary">{{item.commit.author.date}}</span>
+                by <span class="label label-info">{{item.commit.author.name}}</span>
+            </p>
+        </li>
+    </ul>
 </div>
