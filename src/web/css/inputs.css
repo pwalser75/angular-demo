@@ -6,9 +6,10 @@
 
 .input-group > label {
     display: block;
-    color: #BBBBBB;
+    color: #666666;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 1px;
     font-size: 70%;
     padding: 0;
     margin: 0 0 3px 0;
@@ -18,8 +19,8 @@
     display: block;
     width: 100%;
     border: 0;
-    padding: 6px;
-    background: rgba(0, 0, 0, 0.04);
+    padding: 0 0 6px 0;
+    background: none;
     border-bottom: 1px solid #666666;
 }
 
@@ -30,7 +31,8 @@
 
 .input-group > span {
     font-weight: normal;
-    font-style: italic;
+    xfont-style: italic;
+    font-size: 90%;
 }
 
 .input-group.validation.error > label {
@@ -71,4 +73,8 @@
 
 input:invalid {
     box-shadow: none;
+}
+
+*:focus {
+    outline: none;
 }
