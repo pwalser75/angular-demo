@@ -26,13 +26,19 @@ export default angular
 
         return {
             'request': function (request) {
-                console.log("REQUEST: " + JSON.stringify(request));
-                var userContext = $injector.get('UserContext');
-                console.log("USER CONTEXT: " + JSON.stringify(userContext));
-                if (userContext && userContext.credentials) {
-                    var auth = btoa(userContext.credentials.login + ":" + userContext.credentials.password);
-                    console.log("Using basic auth header: " + auth);
-                    request.headers.Authorization = "Basic " + auth;
+                console.log("REQUEST: " + request.url);
+
+                // apply authentication only to selected resources
+                // if multiple credentials are used (multiple backends, or multiple authentication methods
+                // such as basic or token), it has to be determined upon the call which credentials are to be used/supplied
+
+                if (request.url.startsWith("https://httpbin.org")) {
+                    var userContext = $injector.get('UserContext');
+                    if (userContext && userContext.credentials) {
+                        var auth = btoa(userContext.credentials.login + ":" + userContext.credentials.password);
+                        console.log("Using basic auth header: " + auth);
+                        request.headers.Authorization = "Basic " + auth;
+                    }
                 }
 
                 return request || $q.when(request);
@@ -41,15 +47,15 @@ export default angular
             'response': function (response) {
                 console.log("SUCCESS: " + response.config.url + " -> " + response.status);
                 if (response.status == 401) {
-                    $injector.get('$state').transitionTo('app.login');
+                    $injector.get('$state').go('app.login');
                     return $q.reject(response);
                 }
                 return response;
             },
             'responseError': function (response) {
-                // console.log("ERROR: " + response.config.url + " -> " + response.status);
+                console.log("ERROR: " + response.status + ", response: " + JSON.stringify(response));
                 if (response.status == 401) {
-                    $injector.get('$state').transitionTo('app.login');
+                    $injector.get('$state').go('app.login');
                 }
                 return $q.reject(response);
             }

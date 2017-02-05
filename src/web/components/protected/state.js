@@ -12,6 +12,10 @@ function detailRoute($stateProvider) {
                             return protectedService.getData();
                         }]
                     }
+                },
+                userMenu: {
+                    controller: 'ApplicationController as ctrl',
+                    templateUrl: 'templates/user-menu.html'
                 }
             }
         });

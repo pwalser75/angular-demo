@@ -11,6 +11,10 @@ function detailRoute($stateProvider) {
                 menu: {
                     controller: 'ApplicationController as ctrl',
                     templateUrl: 'templates/default-menu.html'
+                },
+                userMenu: {
+                    controller: 'ApplicationController as ctrl',
+                    templateUrl: 'templates/user-menu.html'
                 }
             }
         });

@@ -12,6 +12,7 @@ class UserContext {
 
     logout() {
         this.user = null;
+        this.credentials = null;
     }
 
     getUser() {
