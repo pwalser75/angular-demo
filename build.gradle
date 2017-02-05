@@ -9,6 +9,9 @@ version = '1.0.0-SNAPSHOT'
 description = 'Angular Demo Project'
 jar.enabled = false
 
+defaultTasks 'clean', 'build', 'install'
+
+
 war {
   with {
     from( "${project.projectDir}/build/frontend" )

@@ -1,0 +1,18 @@
+<div id="title" class="wallpaper">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Protected resource</h1>
+            <h3>Basic Auth required to access this resource</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1>Protected data:</h1>
+    <div ng-show="ctrl.data">
+        <b>Authenticated:</b> {{ctrl.data.authenticated}}
+        <br>
+        <b>User:</b> {{ctrl.data.user}}
+    </div>
+</div>

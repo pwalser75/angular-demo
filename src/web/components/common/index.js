@@ -1,6 +1,7 @@
 import angular from "angular";
 import commaSeparatedFilter from "./filters/CommaSeparatedFilter";
 import movieService from "./services/MovieService";
+import protectedService from "./services/ProtectedService";
 import exampleService from "./services/ExampleService";
 import userContext from "./data/UserContext";
 import formFieldComponent from "./components/FormComponent";
@@ -15,4 +16,5 @@ export default angular
     .component('rating', ratingComponent)
     .service('UserContext', userContext)
     .service('MovieService', movieService)
-    .service('ExampleService', exampleService);
+    .service('ExampleService', exampleService)
+    .service('ProtectedService', protectedService);
