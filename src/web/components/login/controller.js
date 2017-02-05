@@ -12,8 +12,11 @@ class LoginController {
         var self = this;
         this.UserContext.user = {
             name: self.user
+        };this.UserContext.credentials = {
+            login: self.user,
+            password: self.password
         };
-        console.log("Logged in as: " + JSON.stringify(this.UserContext.user));
+        console.log("Logged in as: " + JSON.stringify(this.UserContext.user) +" with credentials "+ JSON.stringify(this.UserContext.user));
         this.$state.transitionTo('app.welcome');
     }
 }

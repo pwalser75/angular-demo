@@ -3,7 +3,7 @@ import commaSeparatedFilter from "./filters/CommaSeparatedFilter";
 import movieService from "./services/MovieService";
 import protectedService from "./services/ProtectedService";
 import exampleService from "./services/ExampleService";
-import userContext from "./data/UserContext";
+import userContext from "./context/UserContext";
 import formFieldComponent from "./components/FormComponent";
 import ratingComponent from "./components/RatingComponent";
 
